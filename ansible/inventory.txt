@@ -1,0 +1,6 @@
+[appservers]
+ansible-dev-app1 ansible_host=[] ansible_connection=ssh ansible_user=ec2-user
+ansible-dev-app2 ansible_host=[] ansible_connection=ssh ansible_user=ec2-user
+[dbservers]
+ansible-dev-db1 ansible_host=[] ansible_connection=ssh ansible_user=ec2-user
+ansible-dev-db2 ansible_host=[] ansible_connection=ssh ansible_user=ec2-user

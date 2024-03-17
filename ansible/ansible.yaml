@@ -1,0 +1,35 @@
+- name: Setup same server
+  hosts: 
+    - appservers
+    - dbservers
+  become: True
+  tasks:
+    - name: Ensure group normalusers exists
+      group:
+        name: normalusers
+        state: present
+    
+    - name: Create new user
+      user:
+        name: normaluser
+        group: normalusers
+        createhome: yes
+        shell: /bin/bash
+      register: create_user
+
+    - name: Print create user status
+      debug:
+        msg: "ユーザー作成に成功しました。"
+      when: create_user.changed
+
+- name: Setup nginx server
+  hosts: appservers
+  become: True
+  roles:
+    - app_server_role
+
+- name: Setup db server
+  hosts: dbservers
+  become: True
+  roles:
+    - db_server_role
